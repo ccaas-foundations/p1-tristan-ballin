@@ -4,7 +4,9 @@ import dev.revature.entity.Agent;
 import dev.revature.entity.AgentCategory;
 import dev.revature.entity.AgentStatus;
 import dev.revature.repository.AgentRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,14 +25,23 @@ public class AgentService {
     }
 
     public Agent getAgentById(Long id){
-        Optional<Agent> agent = agentRepository.findById(id);
-        if (agent.isEmpty() || agent.get().getId() == null){
-            return null;
-        }
-        return agent.get();
+        return agentRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Agent not found"));
     }
 
     public List<Agent> getAvailableAgentsByCategory(AgentCategory category){
             return agentRepository.findAgentsByAvailableStatusAndCategory(category);
+    }
+    public  Agent createAgent(Agent agent){
+        return agentRepository.save(agent);
+    }
+
+    public  Agent updateAgent(long id, AgentStatus status){
+        Agent agent = agentRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Agent not found"));
+        agent.setStatus(status);
+        return agentRepository.save(agent);
     }
 }

@@ -5,12 +5,10 @@ import dev.revature.entity.AgentCategory;
 import dev.revature.entity.AgentStatus;
 import dev.revature.repository.AgentRepository;
 import dev.revature.service.AgentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class AgentController {
@@ -33,6 +31,18 @@ public class AgentController {
     @GetMapping(value = "/agents/{id}")
     public Agent getAgentsById(@PathVariable long id){
         return agentService.getAgentById(id);
+    }
+
+    @PostMapping(value = "/agents")
+    public Agent createAgent(Agent agent){
+        return agentService.createAgent(agent);
+    }
+
+    @PutMapping(value = "/agents/{id}/status")
+    public Agent updateAgent(@PathVariable long id,
+                             @RequestBody Map<String, String> body){
+        AgentStatus status = AgentStatus.valueOf(body.get("status"));
+        return agentService.updateAgent(id, status);
     }
 
 
