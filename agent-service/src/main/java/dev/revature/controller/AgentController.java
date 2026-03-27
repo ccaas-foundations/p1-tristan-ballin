@@ -13,7 +13,7 @@ import java.util.Map;
 @RestController
 public class AgentController {
 
-    private AgentService agentService;
+    private final AgentService agentService;
 
     public AgentController(AgentService agentService){
         this.agentService = agentService;

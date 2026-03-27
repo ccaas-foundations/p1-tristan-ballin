@@ -1,6 +1,7 @@
 package dev.revature.model;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+import tools.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 @JacksonXmlRootElement
 public class CallEvent {
