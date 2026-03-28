@@ -26,15 +26,21 @@ public class RoutingService {
         this.inboundCallRepository = inboundCallRepository;
     }
 
+    //parse callCategory and default to GENERAL
+    public static CallCategory parseCategory(String value) {
+        try {
+            return CallCategory.valueOf(value);
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return CallCategory.GENERAL;
+        }
+    }
+
     @Transactional
     public void routeCall(CallEvent callEvent){
 
-        //parse callCategory and default to GENERAL
-        CallCategory parsedCategory = callEvent.getCallCategory();
-
+        CallCategory parsedCategory = parseCategory(callEvent.getCallCategory());
 
         //Query for available agent
-
         List<AgentSummary> agents = restClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("agents")

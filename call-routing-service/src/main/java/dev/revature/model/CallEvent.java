@@ -13,7 +13,7 @@ public class CallEvent {
     @JacksonXmlProperty(localName = "callId")
     private String callId;
     @JacksonXmlProperty(localName = "callCategory")
-    private CallCategory callCategory;
+    private String callCategory;
     @JacksonXmlProperty(localName = "callerNumber")
     private String callerNumber;
     @JacksonXmlProperty(localName = "callerName")
@@ -29,11 +29,11 @@ public class CallEvent {
         this.callId = callId;
     }
 
-    public CallCategory getCallCategory() {
+    public String getCallCategory() {
         return callCategory;
     }
 
-    public void setCallCategory(CallCategory callCategory) {
+    public void setCallCategory(String callCategory) {
         this.callCategory = callCategory;
     }
 
