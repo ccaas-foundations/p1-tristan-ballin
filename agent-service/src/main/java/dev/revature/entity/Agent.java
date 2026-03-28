@@ -18,6 +18,7 @@ public class Agent {
     private AgentStatus status;
     @ElementCollection()
     @CollectionTable(name = "agent_categories", joinColumns = @JoinColumn(name = "agent_id"))
+    @Enumerated(EnumType.STRING)
     private Set<AgentCategory> categories;
 
     public Agent() {

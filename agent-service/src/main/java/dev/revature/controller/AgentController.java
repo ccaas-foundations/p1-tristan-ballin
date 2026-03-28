@@ -20,7 +20,7 @@ public class AgentController {
     }
 
     @GetMapping(value = "/agents")
-    public List<Agent> getAgents(@RequestParam(name = "category",required = false) AgentStatus status,
+    public List<Agent> getAgents(@RequestParam(name = "status",required = false) AgentStatus status,
                                  @RequestParam(name = "category",required = false) AgentCategory category){
         if (status!=AgentStatus.AVAILABLE&&category!=null){
             return agentService.getAvailableAgentsByCategory(category);

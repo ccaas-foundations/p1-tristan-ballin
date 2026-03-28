@@ -1,15 +1,25 @@
 package dev.revature.model;
 
 
-import tools.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import dev.revature.entity.CallCategory;
+
+import java.time.LocalDateTime;
 
 @JacksonXmlRootElement
 public class CallEvent {
+    @JacksonXmlProperty(localName = "callId")
     private String callId;
-    private String category;
+    @JacksonXmlProperty(localName = "callCategory")
+    private CallCategory callCategory;
+    @JacksonXmlProperty(localName = "callerNumber")
     private String callerNumber;
+    @JacksonXmlProperty(localName = "callerName")
     private String callerName;
-    private String receivedAt;
+    @JacksonXmlProperty(localName = "timestamp")
+    private LocalDateTime receivedAt;
 
     public String getCallId() {
         return callId;
@@ -19,12 +29,12 @@ public class CallEvent {
         this.callId = callId;
     }
 
-    public String getCategory() {
-        return category;
+    public CallCategory getCallCategory() {
+        return callCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCallCategory(CallCategory callCategory) {
+        this.callCategory = callCategory;
     }
 
     public String getCallerNumber() {
@@ -43,11 +53,15 @@ public class CallEvent {
         this.callerName = callerName;
     }
 
-    public String getReceivedAt() {
+    public LocalDateTime getReceivedAt() {
         return receivedAt;
     }
 
-    public void setReceivedAt(String receivedAt) {
+    public void setReceivedAt(LocalDateTime receivedAt) {
         this.receivedAt = receivedAt;
     }
+
+    public CallEvent() {
+    }
+
 }
